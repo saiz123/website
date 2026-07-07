@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sai Teja Kavuri — Security Engineer · Alert Triage Console</title>
+  <meta name="description" content="Sai Teja Kavuri — cybersecurity engineer in St. Louis, MO. Builder of Sift (explainable SOC alert triage) and RefractIQ. Homelab-driven, detection-obsessed, open to SOC Analyst and Security Engineer roles." />
+  <meta name="author" content="Sai Teja Kavuri" />
+  <link rel="canonical" href="https://saitejakavuri.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sai Teja Kavuri — Security Engineer" />
+  <meta property="og:description" content="I build the tools SOCs wish they had. Explainable alert triage, homelab detection pipelines, and security engineering — see the case files." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://saitejakavuri.com/" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230b0f16'/%3E%3Cpath d='M16 5l9 3.5v7c0 5.5-3.8 9.6-9 11.5-5.2-1.9-9-6-9-11.5v-7L16 5z' fill='none' stroke='%235ccfe6' stroke-width='2'/%3E%3Ccircle cx='16' cy='15' r='3' fill='%233ddc97'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css?v=3" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Sai Teja Kavuri",
+    "jobTitle": "Security Engineer",
+    "email": "mailto:saitejakavuri39@gmail.com",
+    "url": "https://saitejakavuri.com/",
+    "address": { "@type": "PostalAddress", "addressLocality": "St. Louis", "addressRegion": "MO" },
+    "alumniOf": "M.S. Information Systems",
+    "sameAs": [
+      "https://github.com/saiz123",
+      "https://www.linkedin.com/in/sai-teja-kavuri-cyber/"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- boot sequence (plays once per session) -->
+  <div class="boot" id="boot" aria-hidden="true" hidden>
+    <pre class="boot-lines" id="bootLines"></pre>
+  </div>
+
+  <!-- scroll progress -->
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ======= NAV ======= -->
+  <header class="nav" id="top">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="brand-sigil" aria-hidden="true">▲</span>
+        <span class="brand-text">stk<span class="brand-dim">://</span>console</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">Profile</a>
+        <a href="#cases">Case Files</a>
+        <a href="#lab">The Lab</a>
+        <a href="#coverage">Coverage</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="palette-btn" id="openPalette" title="Search — Ctrl+K" aria-label="Open command palette">
+        <span aria-hidden="true">⌕</span><span class="pal-word"> search</span><kbd class="pal-kbd" aria-hidden="true">ctrl K</kbd>
+      </button>
+      <button class="term-btn" id="openTerm" title="Open terminal (press `)" aria-label="Open interactive terminal">
+        <span aria-hidden="true">&gt;_</span><span class="term-word"> terminal</span>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" hidden aria-label="Mobile">
+      <a href="#about">Profile</a>
+      <a href="#cases">Case Files</a>
+      <a href="#lab">The Lab</a>
+      <a href="#coverage">Coverage</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ======= HERO ======= -->
+    <section class="hero">
+      <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+      <div class="radar" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="kicker reveal">// alert triaged · visitor cleared</p>
+          <h1 class="reveal" id="heroName">Sai Teja <span class="accent">Kavuri</span></h1>
+          <p class="hero-sub reveal">
+            I build the tools SOCs wish they had. Security engineer with an M.S. in Information
+            Systems — I don't just study detection, I run my own pipeline: sensors, SIEM, and a
+            triage engine I wrote from scratch.
+          </p>
+          <div class="hero-meta reveal">
+            <span class="chip chip-loc" title="Location">◈ St. Louis, MO</span>
+            <span class="chip chip-open" title="Status">● open to SOC / Security Engineer roles</span>
+          </div>
+          <div class="hero-cta reveal">
+            <a class="btn btn-primary" href="#cases">Open case files</a>
+            <a class="btn btn-ghost" href="mailto:saitejakavuri39@gmail.com">Contact me</a>
+          </div>
+        </div>
+
+        <div class="hero-term reveal" aria-label="Simulated triage of this page visit">
+          <div class="term-chrome">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="term-title">sift — triage receipt</span>
+          </div>
+          <pre class="term-body" id="heroTerm" aria-live="off"></pre>
+        </div>
+      </div>
+
+      <!-- stats strip -->
+      <div class="stats" aria-label="Quick stats">
+        <div class="stat reveal">
+          <span class="stat-num"><span data-count="8">0</span></span>
+          <span class="stat-label">alert formats Sift ingests</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num"><span data-count="243">0</span></span>
+          <span class="stat-label">tests passing in RefractIQ</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num"><span data-count="5">0</span></span>
+          <span class="stat-label">case files shipped &amp; documented</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num"><span data-count="100">0</span>%</span>
+          <span class="stat-label">self-hosted, hand-built, no template</span>
+        </div>
+      </div>
+
+      <!-- log ticker -->
+      <div class="ticker" aria-hidden="true">
+        <span class="ticker-label">EVENT FEED</span>
+        <div class="ticker-viewport">
+          <div class="ticker-track" id="tickerTrack"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= ABOUT / PROFILE ======= -->
+    <section class="section" id="about">
+      <div class="section-head reveal">
+        <span class="section-no">01</span>
+        <h2>Analyst Profile</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            Most people meet security through certifications and slide decks. I met it through a
+            homelab that wouldn't stop paging me. Drowning in noisy alerts from my own Wazuh and
+            Suricata stack, I did what an engineer does — I built <a href="#case-sift">Sift</a>,
+            a triage system that scores every alert, shows its work on an itemized receipt, and
+            learns from every verdict.
+          </p>
+          <p>
+            That's the pattern in everything I do: <strong>find the operational pain, then build the
+            fix</strong>. Penetration testing taught me how attackers think; running my own detection
+            pipeline taught me how defenders drown. I sit in the space between — comfortable in
+            Kali and comfortable in a codebase.
+          </p>
+          <p>
+            I'm looking for a SOC or security engineering team where "I automated that" is a
+            compliment, not a threat.
+          </p>
+        </div>
+        <aside class="about-facts reveal">
+          <h3 class="facts-title">// quick enrichment</h3>
+          <dl>
+            <div><dt>Education</dt><dd>M.S. Information Systems</dd></div>
+            <div><dt>Focus</dt><dd>Detection engineering · alert triage · pen-testing</dd></div>
+            <div><dt>Ops stack</dt><dd>Splunk · Wazuh · Suricata · threat intel</dd></div>
+            <div><dt>Builds with</dt><dd>Python · TypeScript · Docker · Terraform · GCP</dd></div>
+            <div><dt>Frameworks</dt><dd>NIST CSF · HIPAA · secure SDLC</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ======= PROJECTS / CASE FILES ======= -->
+    <section class="section" id="cases">
+      <div class="section-head reveal">
+        <span class="section-no">02</span>
+        <h2>Case Files</h2>
+        <p class="section-sub">Every project triaged the way Sift would do it — signals, score, verdict.</p>
+      </div>
+
+      <div class="cases-grid">
+        <!-- SIFT — flagship -->
+        <article class="case case-wide reveal" id="case-sift" data-repo="saiz123/Sift">
+          <header class="case-head">
+            <span class="sev sev-crit">FLAGSHIP</span>
+            <span class="case-meta"><span class="gh-meta"></span><span class="case-id">CASE-001</span></span>
+          </header>
+          <div class="score-row" aria-label="Triage score 98 out of 100">
+            <div class="score-bar"><span class="score-fill fill-crit" style="width:98%"></span></div>
+            <span class="score-val">98<span class="score-of">/100</span></span>
+          </div>
+          <h3 class="case-title">Sift — Alert Triage &amp; Learning System</h3>
+          <p class="case-desc">
+            A self-hosted triage engine for drowning SOCs. Every alert gets an itemized
+            <em>receipt</em> — which signals fired, the points they carried, and plain-English
+            reasoning — so an analyst can agree or override in seconds. It tracks those verdicts
+            and statistically recalibrates noisy rules over time. Ingests eight formats
+            (Wazuh, Suricata, Elastic, AWS GuardDuty, M365 Defender, CrowdStrike, osquery,
+            generic webhooks), correlates related alerts into cases, and pulls free threat-intel
+            feeds with zero API keys.
+          </p>
+          <ul class="case-receipt">
+            <li><span>+ pure Python, zero external dependencies</span><span class="pts">stdlib only</span></li>
+            <li><span>+ built for air-gapped environments</span><span class="pts">SQLite + ThreadingHTTPServer</span></li>
+            <li><span>+ explainable by design</span><span class="pts">no black-box AI</span></li>
+            <li><span>+ ships with Docker Compose</span><span class="pts">deploy in minutes</span></li>
+          </ul>
+          <footer class="case-foot">
+            <div class="tags">
+              <span>Python</span><span>SQLite</span><span>Docker</span><span>Wazuh</span><span>Suricata</span><span>Threat Intel</span>
+            </div>
+            <a class="case-link" href="https://github.com/saiz123/Sift" target="_blank" rel="noopener">view source ↗</a>
+          </footer>
+        </article>
+
+        <!-- RefractIQ -->
+        <article class="case reveal" data-repo="saiz123/RefractIQ">
+          <header class="case-head">
+            <span class="sev sev-high">HIGH</span>
+            <span class="case-meta"><span class="gh-meta"></span><span class="case-id">CASE-002</span></span>
+          </header>
+          <div class="score-row" aria-label="Triage score 91 out of 100">
+            <div class="score-bar"><span class="score-fill fill-high" style="width:91%"></span></div>
+            <span class="score-val">91<span class="score-of">/100</span></span>
+          </div>
+          <h3 class="case-title">RefractIQ — Multi-Model Build Orchestrator</h3>
+          <p class="case-desc">
+            An open-source platform that coordinates AI models from multiple providers through a
+            9-stage software pipeline — intake to architecture to build, test, review, and repair —
+            always routing each task to the cheapest capable model. Structured JSON artifacts
+            between every agent, per-stage cost tracking, secret redaction, and sandboxed
+            execution. 243 passing tests.
+          </p>
+          <footer class="case-foot">
+            <div class="tags">
+              <span>TypeScript</span><span>Next.js</span><span>Hono</span><span>pnpm monorepo</span>
+            </div>
+            <span class="case-links">
+              <a class="case-link" href="https://saiz123.github.io/RefractIQ/" target="_blank" rel="noopener">live demo ↗</a>
+              <a class="case-link" href="https://github.com/saiz123/RefractIQ" target="_blank" rel="noopener">view source ↗</a>
+            </span>
+          </footer>
+        </article>
+
+        <!-- Healthcare risk prediction -->
+        <article class="case reveal" data-repo="saiz123/MRP_PROJECT">
+          <header class="case-head">
+            <span class="sev sev-med">RESEARCH</span>
+            <span class="case-meta"><span class="gh-meta"></span><span class="case-id">CASE-003</span></span>
+          </header>
+          <div class="score-row" aria-label="Triage score 84 out of 100">
+            <div class="score-bar"><span class="score-fill fill-med" style="width:84%"></span></div>
+            <span class="score-val">84<span class="score-of">/100</span></span>
+          </div>
+          <h3 class="case-title">Healthcare Risk Prediction</h3>
+          <p class="case-desc">
+            Master's research project: a Python application that forecasts disease risk from user
+            inputs — designed with security first. Validated inputs, HTTPS-only deployment, and
+            HIPAA-aware handling of sensitive health data. Security and data science aren't
+            separate disciplines here; they're the same requirement.
+          </p>
+          <footer class="case-foot">
+            <div class="tags">
+              <span>Python</span><span>ML</span><span>HIPAA</span><span>Secure SDLC</span>
+            </div>
+            <a class="case-link" href="https://github.com/saiz123/MRP_PROJECT" target="_blank" rel="noopener">view source ↗</a>
+          </footer>
+        </article>
+
+        <!-- Splunk lab work -->
+        <article class="case reveal" data-repo="saiz123/Splunk-Projects-For-Beginners">
+          <header class="case-head">
+            <span class="sev sev-low">LAB WORK</span>
+            <span class="case-meta"><span class="gh-meta"></span><span class="case-id">CASE-004</span></span>
+          </header>
+          <div class="score-row" aria-label="Triage score 78 out of 100">
+            <div class="score-bar"><span class="score-fill fill-low" style="width:78%"></span></div>
+            <span class="score-val">78<span class="score-of">/100</span></span>
+          </div>
+          <h3 class="case-title">Splunk Log Analysis Labs</h3>
+          <p class="case-desc">
+            Hands-on SIEM reps: ingesting, parsing, and hunting through logs in Splunk —
+            dashboards, alerts, and searches built against realistic datasets. The groundwork
+            that made Sift's scoring signals feel obvious instead of theoretical.
+          </p>
+          <footer class="case-foot">
+            <div class="tags">
+              <span>Splunk</span><span>SPL</span><span>Log Analysis</span>
+            </div>
+            <a class="case-link" href="https://github.com/saiz123/Splunk-Projects-For-Beginners" target="_blank" rel="noopener">view source ↗</a>
+          </footer>
+        </article>
+
+        <!-- Job scraper -->
+        <article class="case reveal" data-repo="saiz123/JobScraperApp">
+          <header class="case-head">
+            <span class="sev sev-low">UTILITY</span>
+            <span class="case-meta"><span class="gh-meta"></span><span class="case-id">CASE-005</span></span>
+          </header>
+          <div class="score-row" aria-label="Triage score 72 out of 100">
+            <div class="score-bar"><span class="score-fill fill-low" style="width:72%"></span></div>
+            <span class="score-val">72<span class="score-of">/100</span></span>
+          </div>
+          <h3 class="case-title">JobScraperApp</h3>
+          <p class="case-desc">
+            A JavaScript scraper that hunts job boards so I don't have to. Small tool, honest
+            purpose: automate the boring part of the pipeline and spend the time on interviews
+            instead of tabs.
+          </p>
+          <footer class="case-foot">
+            <div class="tags">
+              <span>JavaScript</span><span>Automation</span>
+            </div>
+            <a class="case-link" href="https://github.com/saiz123/JobScraperApp" target="_blank" rel="noopener">view source ↗</a>
+          </footer>
+        </article>
+      </div>
+
+      <p class="cases-more reveal">
+        <a href="https://github.com/saiz123?tab=repositories" target="_blank" rel="noopener">browse the full evidence locker on GitHub ↗</a>
+      </p>
+    </section>
+
+    <!-- ======= HOMELAB ======= -->
+    <section class="section" id="lab">
+      <div class="section-head reveal">
+        <span class="section-no">03</span>
+        <h2>The Lab</h2>
+        <p class="section-sub">Not a diagram from a textbook — the pipeline actually running on my hardware.</p>
+      </div>
+
+      <div class="pipeline reveal" role="img" aria-label="Homelab detection pipeline: sensors feed the SIEM, which feeds Sift for triage, which routes to notifications">
+        <div class="pipe-node">
+          <span class="pipe-stage">SENSE</span>
+          <strong>Sensors</strong>
+          <span class="pipe-detail">Suricata IDS · osquery · host logs</span>
+        </div>
+        <div class="pipe-arrow" aria-hidden="true">⟶</div>
+        <div class="pipe-node">
+          <span class="pipe-stage">COLLECT</span>
+          <strong>SIEM</strong>
+          <span class="pipe-detail">Wazuh · rule engine · enrichment</span>
+        </div>
+        <div class="pipe-arrow" aria-hidden="true">⟶</div>
+        <div class="pipe-node pipe-node-hot">
+          <span class="pipe-stage">TRIAGE</span>
+          <strong>Sift</strong>
+          <span class="pipe-detail">scoring receipts · learning loop · threat intel</span>
+        </div>
+        <div class="pipe-arrow" aria-hidden="true">⟶</div>
+        <div class="pipe-node">
+          <span class="pipe-stage">RESPOND</span>
+          <strong>Notify</strong>
+          <span class="pipe-detail">Slack / Discord webhooks · case queue</span>
+        </div>
+      </div>
+
+      <div class="lab-notes reveal">
+        <p>
+          Everything is self-hosted in Docker, wired together on my own network, and fed by free
+          threat-intel feeds (abuse.ch, Tor exit nodes). When a rule gets noisy, Sift's confidence
+          intervals quietly turn its volume down — and I get to keep sleeping. This lab is where
+          every scoring signal in Sift was born, tested, and occasionally humbled.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======= SKILLS / COVERAGE ======= -->
+    <section class="section" id="coverage">
+      <div class="section-head reveal">
+        <span class="section-no">04</span>
+        <h2>Detection Coverage</h2>
+        <p class="section-sub">What I can already see, and what I'm actively expanding.</p>
+      </div>
+
+      <div class="coverage-grid">
+        <div class="cov-card reveal">
+          <h3><span class="cov-dot cov-blue" aria-hidden="true"></span>Security Operations</h3>
+          <ul>
+            <li>Splunk (SPL, dashboards, alerting)</li>
+            <li>Wazuh &amp; Suricata deployment</li>
+            <li>Alert triage &amp; correlation</li>
+            <li>Threat-intel enrichment</li>
+          </ul>
+        </div>
+        <div class="cov-card reveal">
+          <h3><span class="cov-dot cov-red" aria-hidden="true"></span>Offense</h3>
+          <ul>
+            <li>Penetration testing fundamentals</li>
+            <li>Kali Linux toolchain</li>
+            <li>Attack-surface thinking on defense</li>
+          </ul>
+        </div>
+        <div class="cov-card reveal">
+          <h3><span class="cov-dot cov-green" aria-hidden="true"></span>Engineering</h3>
+          <ul>
+            <li>Python (stdlib-first, production habits)</li>
+            <li>TypeScript / Node / Next.js</li>
+            <li>React · SQLite · REST APIs</li>
+          </ul>
+        </div>
+        <div class="cov-card reveal">
+          <h3><span class="cov-dot cov-yellow" aria-hidden="true"></span>Infrastructure</h3>
+          <ul>
+            <li>Docker &amp; Docker Compose</li>
+            <li>Terraform · GCP</li>
+            <li>Linux administration · self-hosting</li>
+          </ul>
+        </div>
+        <div class="cov-card reveal">
+          <h3><span class="cov-dot cov-purple" aria-hidden="true"></span>Governance</h3>
+          <ul>
+            <li>NIST Cybersecurity Framework</li>
+            <li>HIPAA-aware data handling</li>
+            <li>Secure SDLC practices</li>
+          </ul>
+        </div>
+        <div class="cov-card cov-card-next reveal">
+          <h3><span class="cov-dot cov-dim" aria-hidden="true"></span>Expanding Next</h3>
+          <ul>
+            <li>Detection-as-code workflows</li>
+            <li>Cloud-native SIEM pipelines</li>
+            <li>Purple-team automation</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= CONTACT ======= -->
+    <section class="section section-contact" id="contact">
+      <div class="section-head reveal">
+        <span class="section-no">05</span>
+        <h2>Open a Channel</h2>
+      </div>
+      <div class="contact-card reveal">
+        <p class="contact-lead">
+          Hiring for a SOC, detection engineering, or security engineering role?
+          Escalate directly — median response time is fast.
+        </p>
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:saitejakavuri39@gmail.com">saitejakavuri39@gmail.com</a>
+          <button class="btn btn-ghost" id="copyEmail" type="button">copy email</button>
+          <a class="btn btn-ghost" href="https://github.com/saiz123" target="_blank" rel="noopener">GitHub ↗</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/sai-teja-kavuri-cyber/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        </div>
+        <p class="contact-hint">psst — press <kbd>`</kbd> for the terminal (try <code>sudo hire-me</code>) or <kbd>ctrl K</kbd> to search.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======= FOOTER ======= -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="foot-status"><span class="pulse" aria-hidden="true"></span> all systems nominal</span>
+      <span class="foot-uptime">session uptime <span id="uptime">00:00</span></span>
+      <button class="theme-btn" id="themeBtn" type="button" title="Cycle console theme">theme: <span id="themeName">viridian</span></button>
+      <span class="foot-note">© <span id="year"></span> Sai Teja Kavuri · hand-built, no template · <a href="#top">back to top ↑</a></span>
+    </div>
+  </footer>
+
+  <!-- ======= COMMAND PALETTE ======= -->
+  <div class="overlay overlay-top" id="palOverlay" hidden>
+    <div class="palette" role="dialog" aria-modal="true" aria-label="Command palette">
+      <div class="pal-input-row">
+        <span class="pal-glyph" aria-hidden="true">⌕</span>
+        <input type="text" id="palInput" placeholder="jump to a section, project, or action…" autocomplete="off" spellcheck="false" aria-label="Search commands" />
+        <kbd>esc</kbd>
+      </div>
+      <ul class="pal-list" id="palList" role="listbox" aria-label="Results"></ul>
+      <div class="pal-foot"><kbd>↑↓</kbd> navigate · <kbd>↵</kbd> run · <kbd>esc</kbd> close</div>
+    </div>
+  </div>
+
+  <!-- ======= INTERACTIVE TERMINAL OVERLAY ======= -->
+  <div class="overlay" id="termOverlay" hidden>
+    <div class="term-window" role="dialog" aria-modal="true" aria-label="Interactive terminal">
+      <div class="term-chrome">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="term-title">visitor@stk-console</span>
+        <button class="term-close" id="closeTerm" aria-label="Close terminal">✕</button>
+      </div>
+      <div class="term-scroll" id="termScroll">
+        <pre class="term-out" id="termOut"></pre>
+        <div class="term-input-row">
+          <span class="prompt">visitor@stk:~$</span>
+          <input type="text" id="termInput" autocomplete="off" spellcheck="false" aria-label="Terminal command input" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=3"></script>
+</body>
+</html>
